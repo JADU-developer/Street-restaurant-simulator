@@ -1,0 +1,159 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7869060886851042638
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 28753958304180480}
+  m_Layer: 0
+  m_Name: Burger_Double_Patty_Takeaway_Red
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &28753958304180480
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7869060886851042638}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 384508359453017130}
+  - {fileID: 4279747621745088574}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1590722020596261874
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 28753958304180480}
+    m_Modifications:
+    - target: {fileID: 1388636384634709976, guid: 1b7181e7e3a3e427495c816b0f373e1b, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388636384634709976, guid: 1b7181e7e3a3e427495c816b0f373e1b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388636384634709976, guid: 1b7181e7e3a3e427495c816b0f373e1b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388636384634709976, guid: 1b7181e7e3a3e427495c816b0f373e1b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388636384634709976, guid: 1b7181e7e3a3e427495c816b0f373e1b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388636384634709976, guid: 1b7181e7e3a3e427495c816b0f373e1b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388636384634709976, guid: 1b7181e7e3a3e427495c816b0f373e1b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388636384634709976, guid: 1b7181e7e3a3e427495c816b0f373e1b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388636384634709976, guid: 1b7181e7e3a3e427495c816b0f373e1b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388636384634709976, guid: 1b7181e7e3a3e427495c816b0f373e1b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388636384634709976, guid: 1b7181e7e3a3e427495c816b0f373e1b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1733531554600582498, guid: 1b7181e7e3a3e427495c816b0f373e1b, type: 3}
+      propertyPath: m_Name
+      value: Burger_Double_patty
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1b7181e7e3a3e427495c816b0f373e1b, type: 3}
+--- !u!4 &384508359453017130 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1388636384634709976, guid: 1b7181e7e3a3e427495c816b0f373e1b, type: 3}
+  m_PrefabInstance: {fileID: 1590722020596261874}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2241254961133680967
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 28753958304180480}
+    m_Modifications:
+    - target: {fileID: 2629607721103794553, guid: 7fc564af1490143d4888ed00f4ba6a7a, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629607721103794553, guid: 7fc564af1490143d4888ed00f4ba6a7a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629607721103794553, guid: 7fc564af1490143d4888ed00f4ba6a7a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629607721103794553, guid: 7fc564af1490143d4888ed00f4ba6a7a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629607721103794553, guid: 7fc564af1490143d4888ed00f4ba6a7a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629607721103794553, guid: 7fc564af1490143d4888ed00f4ba6a7a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629607721103794553, guid: 7fc564af1490143d4888ed00f4ba6a7a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629607721103794553, guid: 7fc564af1490143d4888ed00f4ba6a7a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629607721103794553, guid: 7fc564af1490143d4888ed00f4ba6a7a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629607721103794553, guid: 7fc564af1490143d4888ed00f4ba6a7a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629607721103794553, guid: 7fc564af1490143d4888ed00f4ba6a7a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401887768810650563, guid: 7fc564af1490143d4888ed00f4ba6a7a, type: 3}
+      propertyPath: m_Name
+      value: ParcelBox_Red
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7fc564af1490143d4888ed00f4ba6a7a, type: 3}
+--- !u!4 &4279747621745088574 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2629607721103794553, guid: 7fc564af1490143d4888ed00f4ba6a7a, type: 3}
+  m_PrefabInstance: {fileID: 2241254961133680967}
+  m_PrefabAsset: {fileID: 0}
