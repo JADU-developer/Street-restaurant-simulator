@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1848751985915887809, guid: 4a80ec365428ede4fbfaaa84b2cabf5f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.23598957
       objectReference: {fileID: 0}
     - target: {fileID: 1848751985915887809, guid: 4a80ec365428ede4fbfaaa84b2cabf5f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.0010000467
       objectReference: {fileID: 0}
     - target: {fileID: 1848751985915887809, guid: 4a80ec365428ede4fbfaaa84b2cabf5f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.43145752
       objectReference: {fileID: 0}
     - target: {fileID: 1848751985915887809, guid: 4a80ec365428ede4fbfaaa84b2cabf5f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -88,9 +88,25 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7537382929519040441, guid: 4a80ec365428ede4fbfaaa84b2cabf5f, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7537382929519040441, guid: 4a80ec365428ede4fbfaaa84b2cabf5f, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 8385935739975265481, guid: 4a80ec365428ede4fbfaaa84b2cabf5f, type: 3}
       propertyPath: m_Name
       value: HotDog
+      objectReference: {fileID: 0}
+    - target: {fileID: 8385935739975265481, guid: 4a80ec365428ede4fbfaaa84b2cabf5f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8385935739975265481, guid: 4a80ec365428ede4fbfaaa84b2cabf5f, type: 3}
+      propertyPath: m_TagString
+      value: Food
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -98,13 +114,34 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1848751985915887809, guid: 4a80ec365428ede4fbfaaa84b2cabf5f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4210487839576583658}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8385935739975265481, guid: 4a80ec365428ede4fbfaaa84b2cabf5f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9169686518030154053}
   m_SourcePrefab: {fileID: 100100000, guid: 4a80ec365428ede4fbfaaa84b2cabf5f, type: 3}
 --- !u!4 &2164767776460377728 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1848751985915887809, guid: 4a80ec365428ede4fbfaaa84b2cabf5f, type: 3}
   m_PrefabInstance: {fileID: 550242829213011521}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8341245883480334984 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8385935739975265481, guid: 4a80ec365428ede4fbfaaa84b2cabf5f, type: 3}
+  m_PrefabInstance: {fileID: 550242829213011521}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9169686518030154053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8341245883480334984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5344497ceaf0cf4494b70377b09eae4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tiltSpeed: 30
 --- !u!1001 &9018716545527971023
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113,6 +150,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2164767776460377728}
     m_Modifications:
+    - target: {fileID: 2944658162977485039, guid: 2e4bfe732d21f42979b57ff2d78eab7f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3920787228402300370, guid: 2e4bfe732d21f42979b57ff2d78eab7f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5135865593910628645, guid: 2e4bfe732d21f42979b57ff2d78eab7f, type: 3}
       propertyPath: m_LocalScale.x
       value: 10
@@ -172,6 +217,14 @@ PrefabInstance:
     - target: {fileID: 5480197019551255455, guid: 2e4bfe732d21f42979b57ff2d78eab7f, type: 3}
       propertyPath: m_Name
       value: HotDog
+      objectReference: {fileID: 0}
+    - target: {fileID: 5480197019551255455, guid: 2e4bfe732d21f42979b57ff2d78eab7f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094936974214423411, guid: 2e4bfe732d21f42979b57ff2d78eab7f, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

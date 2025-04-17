@@ -10,7 +10,17 @@ public class Tray : MonoBehaviour
     [SerializeField] private float minWobbleInterval = 2f;
     [SerializeField] private float maxWobbleInterval = 5f;
 
+     private bool IsGrabing = false;
+
+    private Rigidbody objectRigidbody;
+    private Transform objectGrabPointTransform;
+
     private bool isAutoTilting = false;
+
+     private void Awake() 
+    {
+        objectRigidbody = GetComponent<Rigidbody>();
+    }
 
     void Start()
     {
@@ -19,24 +29,62 @@ public class Tray : MonoBehaviour
 
     void Update()
     {
-        HandleTiltInput();
+        if(IsGrabing) HandleTiltInput();
     }
+
+    public void Grab(Transform objectGrabPointTransform) {
+        this.objectGrabPointTransform = objectGrabPointTransform;
+        objectRigidbody.useGravity = false;
+        objectRigidbody.isKinematic = true;
+        IsGrabing = true;
+
+         transform.SetParent(objectGrabPointTransform);
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = objectGrabPointTransform.localRotation;
+    }
+
+    public void Drop() {
+        this.objectGrabPointTransform = null;
+        transform.parent = null; // Detach from parent
+                objectRigidbody.isKinematic = false;
+        objectRigidbody.useGravity = true;
+        IsGrabing = false;
+    }
+
+    private void FixedUpdate() {
+        if (objectGrabPointTransform != null) {
+            // // float lerpSpeed = 10f;
+            // Vector3 newPosition = objectGrabPointTransform.position;
+            // // Vector3 newPosition = Vector3.Lerp(transform.position, objectGrabPointTransform.position, Time.deltaTime * lerpSpeed);
+            // objectRigidbody.rotation = transform.rotation;
+            // objectRigidbody.MovePosition(newPosition);
+
+            // Reset rotation to avoid unwanted tilting
+        }
+    }
+
 
     void HandleTiltInput()
     {
-        float tiltAmount = 0f;
+        float tiltAmountZ = 0f;
+        float tiltAmountX = 0f;
 
         if (Input.GetMouseButton(0)) // LMB
         {
-            tiltAmount = Mathf.Clamp(tiltSpeed * Time.deltaTime , -40 , 40);
+            tiltAmountZ = tiltSpeed * Time.deltaTime;
         }
         else if (Input.GetMouseButton(1)) // RMB
         {
-            tiltAmount =  Mathf.Clamp(-tiltSpeed * Time.deltaTime , -40 , 40);
-            // tiltAmount = -tiltSpeed * Time.deltaTime;
+            tiltAmountZ = -tiltSpeed * Time.deltaTime;
         }
 
-        transform.Rotate(0f, 0f, tiltAmount);
+        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
+        if (Mathf.Abs(scrollInput) > 0.01f) // Detect scroll input
+        {
+            tiltAmountX = scrollInput * tiltSpeed;
+        }
+
+        transform.Rotate(tiltAmountX, 0f, tiltAmountZ);
     }
 
     IEnumerator RandomTrayWobble()
@@ -47,7 +95,7 @@ public class Tray : MonoBehaviour
             float waitTime = Random.Range(minWobbleInterval, maxWobbleInterval);
             yield return new WaitForSeconds(waitTime);
 
-            if (!isAutoTilting)
+            if (!isAutoTilting && IsGrabing)
             {
                 StartCoroutine(AutoTilt());
             }
@@ -76,17 +124,31 @@ public class Tray : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Plate"))
+        if (other.gameObject.CompareTag("Food"))
         {
-            other.transform.SetParent(this.transform.parent);
+            // other.GetComponent<Rigidbody>().useGravity = false;
+            other.transform.SetParent(this.transform);
         }
     }
 
+    // void OnTriggerStay(Collider other)
+    // {
+    //     if (other.gameObject.CompareTag("Food"))
+    //     {
+    //         if (other.GetComponent<Rigidbody>().useGravity == true)
+    //         {
+    //             other.GetComponent<Rigidbody>().useGravity = false;
+    //         }
+    //     }
+    // }
+
+
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Plate"))
+        if (other.gameObject.CompareTag("Food"))
         {
             other.transform.SetParent(null);
+            // other.GetComponent<Rigidbody>().useGravity = true;
         }
     }
 }
