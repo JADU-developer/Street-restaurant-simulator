@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class Tray : MonoBehaviour
 {
+    [SerializeField] private Transform FoodContainer;
     [SerializeField] private float tiltSpeed = 30f;      // Speed of manual tilt
     [SerializeField] private float autoTiltAmount = 5f;  // Max auto tilt angle per wobble
     [SerializeField] private float autoTiltDuration = 0.5f;
     [SerializeField] private float minWobbleInterval = 2f;
     [SerializeField] private float maxWobbleInterval = 5f;
 
-     private bool IsGrabing = false;
+    private bool IsGrabing = false;
 
     private Rigidbody objectRigidbody;
     private Transform objectGrabPointTransform;
 
     private bool isAutoTilting = false;
 
-     private void Awake() 
+    private void Awake()
     {
         objectRigidbody = GetComponent<Rigidbody>();
     }
@@ -29,30 +30,36 @@ public class Tray : MonoBehaviour
 
     void Update()
     {
-        if(IsGrabing) HandleTiltInput();
+        if (IsGrabing) HandleTiltInput();
     }
 
-    public void Grab(Transform objectGrabPointTransform) {
+    public void Grab(Transform objectGrabPointTransform)
+    {
         this.objectGrabPointTransform = objectGrabPointTransform;
         objectRigidbody.useGravity = false;
         objectRigidbody.isKinematic = true;
         IsGrabing = true;
 
-         transform.SetParent(objectGrabPointTransform);
-            transform.localPosition = Vector3.zero;
-            transform.localRotation = objectGrabPointTransform.localRotation;
+        transform.SetParent(objectGrabPointTransform);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = objectGrabPointTransform.localRotation;
     }
 
-    public void Drop() {
+    public void Drop()
+    {
         this.objectGrabPointTransform = null;
         transform.parent = null; // Detach from parent
-                objectRigidbody.isKinematic = false;
+        objectRigidbody.isKinematic = false;
         objectRigidbody.useGravity = true;
         IsGrabing = false;
+
+        transform.rotation = Quaternion.Euler(0, 90, 0);
     }
 
-    private void FixedUpdate() {
-        if (objectGrabPointTransform != null) {
+    private void FixedUpdate()
+    {
+        if (objectGrabPointTransform != null)
+        {
             // // float lerpSpeed = 10f;
             // Vector3 newPosition = objectGrabPointTransform.position;
             // // Vector3 newPosition = Vector3.Lerp(transform.position, objectGrabPointTransform.position, Time.deltaTime * lerpSpeed);
@@ -104,6 +111,8 @@ public class Tray : MonoBehaviour
 
     public IEnumerator AutoTilt()
     {
+        if (IsGrabing) yield return null;
+
         isAutoTilting = true;
 
         // Choose random direction and amount
@@ -127,22 +136,9 @@ public class Tray : MonoBehaviour
         if (other.gameObject.CompareTag("Food"))
         {
             // other.GetComponent<Rigidbody>().useGravity = false;
-            other.transform.SetParent(this.transform);
+            other.transform.SetParent(FoodContainer);
         }
     }
-
-    // void OnTriggerStay(Collider other)
-    // {
-    //     if (other.gameObject.CompareTag("Food"))
-    //     {
-    //         if (other.GetComponent<Rigidbody>().useGravity == true)
-    //         {
-    //             other.GetComponent<Rigidbody>().useGravity = false;
-    //         }
-    //     }
-    // }
-
-
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Food"))

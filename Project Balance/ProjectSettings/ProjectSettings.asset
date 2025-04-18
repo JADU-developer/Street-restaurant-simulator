@@ -765,8 +765,8 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Project Balance
-  metroPackageVersion: 
+  metroPackageName: ProjectBalance
+  metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -774,7 +774,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: Project Balance
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: Project Balance
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0
