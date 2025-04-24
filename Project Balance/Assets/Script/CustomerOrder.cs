@@ -84,6 +84,8 @@ public class CustomerOrder : MonoBehaviour, IInteractable
                 waitingTimeoutLogged = true;
                 timerState = TimerState.None;
                 Debug.Log("Waiting time expired"); // Add your logic here
+
+                StarManager.Instance.RemoveStar(0.1f); // Example: Remove 0.1 star for timeout
             }
         }
         else if (timerState == TimerState.Consuming)
@@ -98,6 +100,8 @@ public class CustomerOrder : MonoBehaviour, IInteractable
 
                 MoneyManager.Instance.AddMoney(MoneyToGive);
                 MoneyToGive = 0;
+
+                StarManager.Instance.AddStar(0.1f);
 
                 soundEffectsManager.instance.playSoundEffectsClip2D(PaymentAudio , transform , Volume);
             }
