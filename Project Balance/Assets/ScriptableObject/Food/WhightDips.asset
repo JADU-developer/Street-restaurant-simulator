@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca57126ad7816354099aeb1927a2385b, type: 3}
+  m_Name: WhightDips
+  m_EditorClassIdentifier: 
+  foodName: WhightDips
+  FoodPrefab: {fileID: 8341245883480334984, guid: 040cb66bbdc53c44bbbf375862d8f7e9, type: 3}
+  foodImage: {fileID: 1189000058, guid: 712ccdcace1cca241aeb2eeaaa58cbf5, type: 3}
+  price: 3
+  BuldlePrice: 20

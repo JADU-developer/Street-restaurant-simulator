@@ -8,6 +8,7 @@ public class SOFood : ScriptableObject
     public GameObject FoodPrefab;
     public Sprite foodImage;
     public int price;
+    public int BuldlePrice;
     
     public SOFood(string name, int price, Sprite image, GameObject prefab)
     {

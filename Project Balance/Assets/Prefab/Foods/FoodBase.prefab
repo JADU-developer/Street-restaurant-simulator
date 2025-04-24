@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3600457823638873141}
   - component: {fileID: 7537382929519040441}
   m_Layer: 0
-  m_Name: PlateBase
+  m_Name: FoodBase
   m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

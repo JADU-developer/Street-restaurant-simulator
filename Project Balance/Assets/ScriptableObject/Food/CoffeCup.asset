@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodName: CoffeCup
   FoodPrefab: {fileID: 8341245883480334984, guid: ce6fd9fee305247408b9305e282b7582, type: 3}
-  foodImage: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  foodImage: {fileID: 829432568, guid: 712ccdcace1cca241aeb2eeaaa58cbf5, type: 3}
   price: 25
+  BuldlePrice: 50

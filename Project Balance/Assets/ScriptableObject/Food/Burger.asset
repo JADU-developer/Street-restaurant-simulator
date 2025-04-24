@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodName: Burger
   FoodPrefab: {fileID: 8341245883480334984, guid: d47015de5b94e33409d4e827e984baec, type: 3}
-  foodImage: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  price: 20
+  foodImage: {fileID: -1222764025, guid: 712ccdcace1cca241aeb2eeaaa58cbf5, type: 3}
+  price: 15
+  BuldlePrice: 100

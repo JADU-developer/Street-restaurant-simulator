@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca57126ad7816354099aeb1927a2385b, type: 3}
-  m_Name: Juice
+  m_Name: YellowJuice
   m_EditorClassIdentifier: 
-  foodName: Juice
-  FoodPrefab: {fileID: 8341245883480334984, guid: 695ca090d36e7e54da9c0c00ceb80b08, type: 3}
-  foodImage: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  price: 20
+  foodName: YellowJuice
+  FoodPrefab: {fileID: 8341245883480334984, guid: a4042a67dcd5ca94bb8baacfa657a7b7, type: 3}
+  foodImage: {fileID: 299131755, guid: 712ccdcace1cca241aeb2eeaaa58cbf5, type: 3}
+  price: 10
+  BuldlePrice: 50

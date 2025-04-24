@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodName: HotDog
   FoodPrefab: {fileID: 8341245883480334984, guid: 23236a574978eba448784132129e3fbc, type: 3}
-  foodImage: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  foodImage: {fileID: 554580947, guid: 712ccdcace1cca241aeb2eeaaa58cbf5, type: 3}
   price: 10
+  BuldlePrice: 50
