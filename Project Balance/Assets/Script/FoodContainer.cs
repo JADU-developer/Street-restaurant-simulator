@@ -11,6 +11,10 @@ public class FoodContainer : MonoBehaviour
     [SerializeField] private Transform PointContainer;
     [SerializeField] private float fSpawnDelay = 5f;
     [SerializeField] private int StartingFoodStock = 29;
+
+    [Header("Audio")]
+    [SerializeField] private AudioClip MoneySpendAudio;
+    [SerializeField]private float Volume = 1f;
     private int maxFoodStock = 99;
     public TMPro.TextMeshProUGUI stockText;
     private int currentFoodStock;
@@ -80,6 +84,8 @@ public class FoodContainer : MonoBehaviour
             currentFoodStock = Mathf.Clamp(currentFoodStock + increaseby, 0, maxFoodStock);
             MoneyManager.Instance.SuntarctMoney(FoodPrefab.GetComponent<ObjectGrabbable>().GetFoodSO().BuldlePrice);
             UpdateStockText();
+
+            soundEffectsManager.instance.playSoundEffectsClip2D(MoneySpendAudio , transform , Volume);
         }
     }
 }

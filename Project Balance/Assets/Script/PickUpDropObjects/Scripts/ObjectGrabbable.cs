@@ -9,6 +9,11 @@ public class ObjectGrabbable : MonoBehaviour
 
     [SerializeField] private float tiltSpeed = 30f; 
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip PickupAudio;
+    [SerializeField] private AudioClip DropAudio;
+    [SerializeField] private float  Volume = 1f;
+
     private bool IsGrabing = false;
 
     private Rigidbody objectRigidbody;
@@ -31,6 +36,8 @@ public class ObjectGrabbable : MonoBehaviour
         objectRigidbody.useGravity = false;
         IsGrabing = true;
         transform.SetParent(null);
+
+        soundEffectsManager.instance.playSoundEffectsClip3D(PickupAudio , transform , Volume);
     }
 
     public void Drop() 
@@ -38,6 +45,8 @@ public class ObjectGrabbable : MonoBehaviour
         this.objectGrabPointTransform = null;
         objectRigidbody.useGravity = true;
         IsGrabing = false;
+
+        soundEffectsManager.instance.playSoundEffectsClip3D(DropAudio , transform , Volume);
     }
 
     private void FixedUpdate() 

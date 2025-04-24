@@ -35,6 +35,13 @@ public class CustomerOrder : MonoBehaviour, IInteractable
     [SerializeField] private GameObject FaceImage;
 
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip OrderDevelerAudio;
+    [SerializeField] private AudioClip OrderResiveAudio;
+    [SerializeField] private AudioClip PaymentAudio;
+    [SerializeField] private float Volume;
+
+
     private int MoneyToGive = 0;
 
 
@@ -88,6 +95,11 @@ public class CustomerOrder : MonoBehaviour, IInteractable
                 consumeTimeoutLogged = true;
                 timerState = TimerState.None;
                 Debug.Log("Consume time finished"); // Add your logic here
+
+                MoneyManager.Instance.AddMoney(MoneyToGive);
+                MoneyToGive = 0;
+
+                soundEffectsManager.instance.playSoundEffectsClip2D(PaymentAudio , transform , Volume);
             }
         }
     }
@@ -129,6 +141,8 @@ public class CustomerOrder : MonoBehaviour, IInteractable
 
             MoneyToGive += randomFood.price;
         }
+
+        soundEffectsManager.instance.playSoundEffectsClip2D(OrderResiveAudio , transform , Volume);
         StartWaitingTimer();
         UpdateOrderUI();
     }
@@ -168,8 +182,7 @@ public class CustomerOrder : MonoBehaviour, IInteractable
             timerState = TimerState.None;
             StartConsumeTimer();
 
-            MoneyManager.Instance.AddMoney(MoneyToGive);
-            MoneyToGive = 0;
+            soundEffectsManager.instance.playSoundEffectsClip3D(OrderDevelerAudio , transform , Volume);
         }
         UpdateOrderUI();
     }

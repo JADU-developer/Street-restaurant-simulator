@@ -11,6 +11,13 @@ public class Tray : MonoBehaviour
     [SerializeField] private float minWobbleInterval = 2f;
     [SerializeField] private float maxWobbleInterval = 5f;
 
+
+    [Header("Audio Settings")]
+    [SerializeField] private AudioClip PickupSound;
+    [SerializeField] private AudioClip dropSound;
+    [SerializeField] private float volume = 1f;
+
+
     private bool IsGrabing = false;
 
     private Rigidbody objectRigidbody;
@@ -35,6 +42,8 @@ public class Tray : MonoBehaviour
 
     public void Grab(Transform objectGrabPointTransform)
     {
+        soundEffectsManager.instance.playSoundEffectsClip3D(PickupSound, transform, volume);
+
         this.objectGrabPointTransform = objectGrabPointTransform;
         objectRigidbody.useGravity = false;
         objectRigidbody.isKinematic = true;
@@ -47,6 +56,9 @@ public class Tray : MonoBehaviour
 
     public void Drop()
     {
+
+        soundEffectsManager.instance.playSoundEffectsClip3D(dropSound, transform, volume);
+        
         this.objectGrabPointTransform = null;
         transform.parent = null; // Detach from parent
         objectRigidbody.isKinematic = false;

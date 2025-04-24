@@ -143,6 +143,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodSO: {fileID: 11400000, guid: 5f36db33f8bacb040bc01098c391b39d, type: 2}
   tiltSpeed: 30
+  PickupAudio: {fileID: 8300000, guid: bb4ba551fa92f8c4781d3cb72385ae3e, type: 3}
+  DropAudio: {fileID: 8300000, guid: 72f0847bddf6bf14d8a632838952e4d7, type: 3}
+  Volume: 1
 --- !u!1001 &8977631587028330885
 PrefabInstance:
   m_ObjectHideFlags: 0
