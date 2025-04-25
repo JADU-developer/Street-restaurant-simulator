@@ -6,8 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private enum PlayerCurrentState
     {
-        Walking,
-        Running,
+        Walking
     }
 
     [SerializeField] private PlayerCurrentState playerCurrentState;
@@ -19,7 +18,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField, Range(1, 20)] private float fWalkSpeed = 20f;
-    [SerializeField, Range(1, 20)] private float fRunSpeed = 30f;
     private float fMoveSpeed;
     private Vector3 velocity;
 
@@ -34,9 +32,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask WhatIsGround;
     private bool IsGrounded;
 
-    [Header("KeyBinding")]
-    [SerializeField] private KeyCode RunKey = KeyCode.LeftShift;
+    [Header("Audio")]
+    [SerializeField] private AudioClip[] FootStepSound;
+    [SerializeField] private float FoodstepSOundPlayDelay = 0.1f;
+    [SerializeField] private float Volume = 1f;
 
+    private bool isPlayingFootstepSound = false;
 
     private void Awake()
     {
@@ -54,11 +55,6 @@ public class PlayerController : MonoBehaviour
         RotatePlayer();
         PlayerInput();
         UpdatePlayerState();
-
-        
-        Move();
-        
-
     }
 
     private void PlayerInput()
@@ -68,29 +64,17 @@ public class PlayerController : MonoBehaviour
 
         moveDirection = transform.right * horizontal + transform.forward * vertical;
         moveDirection = moveDirection.normalized;
+
+        if (moveDirection.x != 0 && moveDirection.z != 0)
+        {
+            Move();
+        }
     }
 
     private void UpdatePlayerState()
     {
-        if (Input.GetKey(RunKey) && moveDirection != Vector3.zero)
-        {
-            playerCurrentState = PlayerCurrentState.Running;
-        }
-        else
-        {
-            playerCurrentState = PlayerCurrentState.Walking;
-        }
-
-        switch (playerCurrentState)
-        {
-            case PlayerCurrentState.Running:
-                fMoveSpeed = fRunSpeed;
-                break;
-
-            case PlayerCurrentState.Walking:
-                fMoveSpeed = fWalkSpeed;
-                break;
-        }
+        playerCurrentState = PlayerCurrentState.Walking;
+        fMoveSpeed = fWalkSpeed;
     }
 
     private void RotatePlayer()
@@ -134,7 +118,17 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         characterController.Move(moveDirection * fSpeedMultiplier * fMoveSpeed * Time.deltaTime);
+        if (IsGrounded && !isPlayingFootstepSound && moveDirection.magnitude > 0)
+        {
+            StartCoroutine(playsound());
+        }
     }
 
-   
+    IEnumerator playsound()
+    {
+        isPlayingFootstepSound = true;
+        yield return new WaitForSeconds(FoodstepSOundPlayDelay);
+        soundEffectsManager.instance.playRandomSoundEffectsClip3D(FootStepSound, transform, Volume);
+        isPlayingFootstepSound = false;
+    }
 }

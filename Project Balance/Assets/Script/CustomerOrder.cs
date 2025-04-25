@@ -15,7 +15,8 @@ public class CustomerOrder : MonoBehaviour, IInteractable
     [Tooltip("Maximum number of items in an order.")]
     [SerializeField] private int maxOrderSize = 3;
 
-    [Header("References")] [Tooltip("Container for delivered food objects. Which is under the tray.")]
+    [Header("References")]
+    [Tooltip("Container for delivered food objects. Which is under the tray.")]
     [SerializeField] private GameObject foodContainer;
 
     [Tooltip("Transform representing the holding tray.")]
@@ -33,6 +34,8 @@ public class CustomerOrder : MonoBehaviour, IInteractable
     [SerializeField] private GameObject OrderTemplet;
     [SerializeField] private GameObject OrderImage;
     [SerializeField] private GameObject FaceImage;
+    [SerializeField] private TextMeshProUGUI OrderNumberText;
+
 
 
     [Header("Audio")]
@@ -66,11 +69,15 @@ public class CustomerOrder : MonoBehaviour, IInteractable
         {
             Debug.LogError($"Max Order Size ({maxOrderSize}) is greater than the available food count ({availableFoods.Count})");
         }
+
+         
     }
 
     private void Update()
     {
         UpdateTimer();
+
+        OrderNumberText.text = (OrderTemplet.transform.parent.childCount - 2).ToString();
     }
 
     private void UpdateTimer()
@@ -103,7 +110,7 @@ public class CustomerOrder : MonoBehaviour, IInteractable
 
                 StarManager.Instance.AddStar(0.1f);
 
-                soundEffectsManager.instance.playSoundEffectsClip2D(PaymentAudio , transform , Volume);
+                soundEffectsManager.instance.playSoundEffectsClip2D(PaymentAudio, transform, Volume);
             }
         }
     }
@@ -146,7 +153,7 @@ public class CustomerOrder : MonoBehaviour, IInteractable
             MoneyToGive += randomFood.price;
         }
 
-        soundEffectsManager.instance.playSoundEffectsClip2D(OrderResiveAudio , transform , Volume);
+        soundEffectsManager.instance.playSoundEffectsClip2D(OrderResiveAudio, transform, Volume);
         StartWaitingTimer();
         UpdateOrderUI();
     }
@@ -166,6 +173,8 @@ public class CustomerOrder : MonoBehaviour, IInteractable
                 }
             }
         }
+
+          
     }
 
     private void TryCompleteOrder(SOFood food, GameObject foodObject)
@@ -186,8 +195,11 @@ public class CustomerOrder : MonoBehaviour, IInteractable
             timerState = TimerState.None;
             StartConsumeTimer();
 
-            soundEffectsManager.instance.playSoundEffectsClip3D(OrderDevelerAudio , transform , Volume);
+            soundEffectsManager.instance.playSoundEffectsClip3D(OrderDevelerAudio, transform, Volume);
+
+             
         }
+
         UpdateOrderUI();
     }
 
@@ -202,7 +214,7 @@ public class CustomerOrder : MonoBehaviour, IInteractable
             Destroy(orderImageTemplateForOnTopHead.transform.parent.GetChild(i).gameObject);
         }
 
-        if(NewSpawnedOrder && NewSpawnedFaceImage != null)
+        if (NewSpawnedOrder && NewSpawnedFaceImage != null)
         {
             Destroy(NewSpawnedOrder);
             Destroy(NewSpawnedFaceImage);
@@ -214,9 +226,8 @@ public class CustomerOrder : MonoBehaviour, IInteractable
 
             clone.transform.SetParent(orderImageTemplateForOnTopHead.transform.parent);
             clone.GetComponent<Image>().sprite = item.foodImage;
-            clone.GetComponent<RectTransform>().localPosition= orderImageTemplateForOnTopHead.GetComponent<RectTransform>().localPosition;
-            clone.GetComponent<RectTransform>().localScale = orderImageTemplateForOnTopHead.GetComponent<RectTransform>().localScale;
-            clone.GetComponent<RectTransform>().localRotation = orderImageTemplateForOnTopHead.GetComponent<RectTransform>().localRotation;
+
+            ResetTransform(clone, orderImageTemplateForOnTopHead.gameObject);
             clone.gameObject.SetActive(true);
         }
 
@@ -226,35 +237,33 @@ public class CustomerOrder : MonoBehaviour, IInteractable
         NewSpawnedOrder.transform.SetParent(OrderTemplet.transform.parent);
         NewSpawnedFaceImage.transform.SetParent(NewSpawnedOrder.transform);
 
-                    ResetTectTransform(NewSpawnedOrder , OrderTemplet);
-                    ResetTectTransform(NewSpawnedFaceImage , FaceImage);
-                    
+        ResetTransform(NewSpawnedOrder, OrderTemplet);
+        ResetTransform(NewSpawnedFaceImage, FaceImage);
 
-        foreach(SOFood item in currentOrder)
+
+        foreach (SOFood item in currentOrder)
         {
             GameObject clone = Instantiate(OrderImage, NewSpawnedOrder.transform.position, Quaternion.identity);
 
             clone.transform.SetParent(NewSpawnedOrder.transform);
 
             clone.GetComponent<Image>().sprite = item.foodImage;
-            // clone.GetComponent<RectTransform>().localPosition= OrderImage.GetComponent<RectTransform>().localPosition;
-            // clone.GetComponent<RectTransform>().localScale = OrderImage.GetComponent<RectTransform>().localScale;
-            // clone.GetComponent<RectTransform>().localRotation = OrderImage.GetComponent<RectTransform>().localRotation;
 
-            ResetTectTransform(clone , OrderImage);
+            ResetTransform(clone, OrderImage);
 
             clone.gameObject.SetActive(true);
         }
 
         NewSpawnedOrder.SetActive(true);
         NewSpawnedFaceImage.SetActive(true);
+
     }
 
-    private void ResetTectTransform(GameObject WhoseReset , GameObject Resetwith)
+    private void ResetTransform(GameObject WhoseReset, GameObject Resetwith)
     {
-        WhoseReset.GetComponent<RectTransform>().localPosition= Resetwith.GetComponent<RectTransform>().localPosition;
-            WhoseReset.GetComponent<RectTransform>().localScale = Resetwith.GetComponent<RectTransform>().localScale;
-            WhoseReset.GetComponent<RectTransform>().localRotation = Resetwith.GetComponent<RectTransform>().localRotation;
+        WhoseReset.GetComponent<RectTransform>().localPosition = Resetwith.GetComponent<RectTransform>().localPosition;
+        WhoseReset.GetComponent<RectTransform>().localScale = Resetwith.GetComponent<RectTransform>().localScale;
+        WhoseReset.GetComponent<RectTransform>().localRotation = Resetwith.GetComponent<RectTransform>().localRotation;
 
     }
 
@@ -278,9 +287,8 @@ public class CustomerOrder : MonoBehaviour, IInteractable
 
         Destroy(NewSpawnedOrder);
         Destroy(NewSpawnedFaceImage);
+
     }
-
-
 
 
     // Add these methods for movement script integration

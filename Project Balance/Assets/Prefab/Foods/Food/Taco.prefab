@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0.019856729
       objectReference: {fileID: 0}
+    - target: {fileID: 3600457823638873141, guid: 4a80ec365428ede4fbfaaa84b2cabf5f, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 832
+      objectReference: {fileID: 0}
     - target: {fileID: 6059405106146934812, guid: 4a80ec365428ede4fbfaaa84b2cabf5f, type: 3}
       propertyPath: m_Enabled
       value: 0

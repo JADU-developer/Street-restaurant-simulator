@@ -84,6 +84,15 @@ public class ObjectGrabbable : MonoBehaviour
     }
 
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            this.enabled = false;
+        }
+    }
+
+
     public SOFood GetFoodSO() 
     {
         return foodSO;
