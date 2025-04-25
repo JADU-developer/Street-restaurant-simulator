@@ -15,6 +15,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private KeyCode KEY_ShopPanel = KeyCode.R;
     private bool IsshowingShoppanel;
 
+    [Header("Pause Menu")]
+    [SerializeField] private GameObject PauseMenuPanel;
+
+    private bool isPaused = false;
 
     private void Start()
     {
@@ -23,6 +27,16 @@ public class UIManager : MonoBehaviour
 
     private void Update() 
     {
+        // Pause on Esc
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isPaused = !isPaused;
+            Time.timeScale = isPaused ? 0 : 1;
+            CursorManager.Instance.SetCanVibleCursor(isPaused);
+                PauseMenuPanel.SetActive(isPaused);
+            Debug.Log(isPaused ? "Game Paused" : "Game Resumed");
+        }
+
         if (Input.GetKeyDown(KEY_CustomerOrderPanel))
         {
             if(isShowingCustomerOrderPanel)

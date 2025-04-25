@@ -19,20 +19,32 @@ public class CustomerMovement : MonoBehaviour
     private bool isMoving = false;
     private bool waitingTimeout = false;
     private bool consumeTimeout = false;
+    private bool isRoaming = false; // New: roaming state
+    private Coroutine roamingCoroutine;
+
+    private Animator animator; // Animator reference
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         customerOrder = GetComponent<CustomerOrder>();
+        animator = GetComponentInChildren<Animator>(); // Get Animator
     }
 
     void Start()
     {
-        GoToAvailableOrderPoint();
+        TryGoToOrderPointOrRoam();
     }
 
     void Update()
     {
+        // Update animation speed parameter
+        if (animator != null && agent != null)
+        {
+            float speed = agent.velocity.magnitude > 0.1f ? 1f : 0f;
+            animator.SetFloat("Speed", speed);
+        }
+
         if (isMoving && currentPoint != null)
         {
             float dist = Vector3.Distance(transform.position, currentPoint.position);
@@ -40,32 +52,98 @@ public class CustomerMovement : MonoBehaviour
             if (dist < 0.6f)
             {
                 isMoving = false;
-                if (canOrder && !isOrdering)
+                transform.rotation = currentPoint.rotation;
+                if (canOrder && !isOrdering && !isRoaming && IsAtOrderPoint(currentPoint))
                 {
                     customerOrder.GenerateRandomOrder();
                     StartCoroutine(OrderRoutine());
                 }
+                else if (isRoaming && IsAtExitPoint(currentPoint))
+                {
+                    // Arrived at exit point, pick another if still roaming
+                    if (isRoaming)
+                        GoToRandomExitPoint();
+                }
+            }
+        }
+        // While roaming, check for available order point
+        if (isRoaming && !isOrdering)
+        {
+            Transform available = GetAvailableOrderPoint();
+            if (available != null)
+            {
+                StopRoamingAndGoToOrderPoint(available);
             }
         }
     }
 
-    void GoToAvailableOrderPoint()
+    void TryGoToOrderPointOrRoam()
+    {
+        Transform available = GetAvailableOrderPoint();
+        if (available != null)
+        {
+            GoToOrderPoint(available);
+        }
+        else
+        {
+            StartRoaming();
+        }
+    }
+
+    Transform GetAvailableOrderPoint()
     {
         foreach (var point in orderPoints)
         {
             if (point.childCount == 0)
-            {
-                currentPoint = point;
-
-                transform.SetParent(point);
-                agent.SetDestination(point.position);
-                isMoving = true;
-                return;
-            }
+                return point;
         }
-        currentPoint = orderPoints[Random.Range(0, orderPoints.Count)];
+        return null;
+    }
+
+    void GoToOrderPoint(Transform point)
+    {
+        currentPoint = point;
+        transform.SetParent(point);
+        agent.SetDestination(point.position);
+        isMoving = true;
+        isRoaming = false;
+        if (roamingCoroutine != null)
+        {
+            StopCoroutine(roamingCoroutine);
+            roamingCoroutine = null;
+        }
+    }
+
+    void StartRoaming()
+    {
+        isRoaming = true;
+        isMoving = false;
+        transform.SetParent(null);
+        GoToRandomExitPoint();
+    }
+
+    void GoToRandomExitPoint()
+    {
+        if (exitPoints.Count == 0) return;
+        Transform nextPoint = exitPoints[Random.Range(0, exitPoints.Count)];
+        currentPoint = nextPoint;
         agent.SetDestination(currentPoint.position);
         isMoving = true;
+    }
+
+    void StopRoamingAndGoToOrderPoint(Transform point)
+    {
+        isRoaming = false;
+        GoToOrderPoint(point);
+    }
+
+    bool IsAtOrderPoint(Transform point)
+    {
+        return orderPoints.Contains(point);
+    }
+    bool IsAtExitPoint(Transform point)
+    {
+        return exitPoints.Contains(point);
     }
 
     IEnumerator OrderRoutine()
@@ -100,7 +178,6 @@ public class CustomerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         customerOrder.ClearOrderUI();
-
         transform.SetParent(null);
         Transform nextPoint = exitPoints[Random.Range(0, exitPoints.Count)];
         currentPoint = nextPoint;
@@ -114,6 +191,6 @@ public class CustomerMovement : MonoBehaviour
         canOrder = true;
         isOrdering = false;
         yield return new WaitForSeconds(1f);
-        GoToAvailableOrderPoint();
+        TryGoToOrderPointOrRoam();
     }
 }

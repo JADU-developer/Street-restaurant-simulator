@@ -30,6 +30,8 @@ public class StarManager : MonoBehaviour
         EmptyStar.gameObject.SetActive(false);
 
         UpdateStarDisplay();
+
+        GameManager.Instance.UpdateAllCustomerOrderSizes();
     }
 
     void UpdateStarDisplay()
@@ -69,7 +71,11 @@ public class StarManager : MonoBehaviour
 
     public float GetCurrentStar()
     {
+
+        Debug.Log( " current star " + currentStarCount);
         return currentStarCount;
+
+
     }
 
     public void AddStar(float starCount)
@@ -79,6 +85,8 @@ public class StarManager : MonoBehaviour
             currentStarCount += starCount;
             UpdateStarDisplay();
         }
+
+        GameManager.Instance.UpdateAllCustomerOrderSizes();
     }
     public void RemoveStar(float starCount)
     {
@@ -87,5 +95,7 @@ public class StarManager : MonoBehaviour
             currentStarCount -= starCount;
             UpdateStarDisplay();
         }
+
+        GameManager.Instance.UpdateAllCustomerOrderSizes();
     }
 }
