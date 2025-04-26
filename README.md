@@ -7,7 +7,7 @@ Solo Developer: 1
 
 Development Time: 10 Days
 
-Play it here: Street Restaurant Simulator on Itch.io
+Play it here: [Street Restaurant Simulator on Itch.io](https://jadu-developer.itch.io/street-restaurant-simulator)
 
 This game was built using free-to-use assets and royalty-free music and sound effects. I do not claim ownership of these external resources.
 
