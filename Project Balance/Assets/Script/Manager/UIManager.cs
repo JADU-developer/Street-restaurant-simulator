@@ -23,12 +23,14 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         HideAllPanel();
+
+        Time.timeScale = 1; 
     }
 
     private void Update() 
     {
         // Pause on Esc
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P) )
         {
             isPaused = !isPaused;
             Time.timeScale = isPaused ? 0 : 1;

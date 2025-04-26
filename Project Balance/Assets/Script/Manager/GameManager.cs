@@ -16,13 +16,32 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int maxOrderSize_3_4 = 7;
     [SerializeField] private int maxOrderSize_4_5 = 9;
 
+    [SerializeField] private GameObject GameOverMenu;
+
     // List of all customer orders in the game
     [SerializeField] private List<CustomerOrder> customerOrders = new List<CustomerOrder>();
+
+
 
 
     private void Awake() 
     {
         Instance = this;
+    }
+
+    private void Start() {
+        GameOverMenu.SetActive(false);
+    }
+
+
+    private void Update() 
+    {
+        if (StarManager.Instance.GetCurrentStar() <= 0f)
+        {
+            CursorManager.Instance.SetCanVibleCursor(true);
+            GameOverMenu.SetActive(true);
+        }
+
     }
 
 

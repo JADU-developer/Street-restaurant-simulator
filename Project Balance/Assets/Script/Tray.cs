@@ -148,7 +148,8 @@ public class Tray : MonoBehaviour
         if (other.gameObject.CompareTag("Food"))
         {
             // other.GetComponent<Rigidbody>().useGravity = false;
-            other.transform.SetParent(FoodContainer);
+            other.transform.SetParent(transform);
+            // other.transform.SetParent(FoodContainer);
         }
     }
     void OnTriggerExit(Collider other)

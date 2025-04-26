@@ -227,16 +227,26 @@ public class CustomerOrder : MonoBehaviour, IInteractable
         if (currentOrder.Count == 0 || waitingTimeoutLogged || consumeTimeoutLogged)
             return;
 
-        if (foodContainer.transform.parent.IsChildOf(holdingTrayTransform))
+        if (holdingTrayTransform.childCount != 0)
         {
-            for (int i = 0; i < foodContainer.transform.childCount; i++)
+            for (int i = 1; i < holdingTrayTransform.GetChild(0).transform.childCount; i++)
             {
-                if (foodContainer.transform.GetChild(i).TryGetComponent<ObjectGrabbable>(out ObjectGrabbable grabbable))
+                if (holdingTrayTransform.GetChild(0).transform.GetChild(i).TryGetComponent<ObjectGrabbable>(out ObjectGrabbable grabbable))
                 {
                     TryCompleteOrder(grabbable.GetFoodSO(), grabbable.gameObject);
                 }
             }
         }
+        // if (foodContainer.transform.parent.IsChildOf(holdingTrayTransform))
+        // {
+        //     for (int i = 1; i < foodContainer.transform.childCount; i++)
+        //     {
+        //         if (foodContainer.transform.GetChild(i).TryGetComponent<ObjectGrabbable>(out ObjectGrabbable grabbable))
+        //         {
+        //             TryCompleteOrder(grabbable.GetFoodSO(), grabbable.gameObject);
+        //         }
+        //     }
+        // }
     }
 
     private void TryCompleteOrder(SOFood food, GameObject foodObject)
